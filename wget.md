@@ -24,7 +24,8 @@ This example shows how to download an entire year of Lightning Mapping Array dat
       --keep-session-cookies \
       --load-cookies=~/.edl_cookies \
       --save-cookies=~/.edl_cookies \
-      --mirror \
+      --recursive \
+      --timestamping \
       --no-parent \
       --reject-regex='\?C=.;O=.' \
       --output-file=bulk-download-example.log \
