@@ -16,21 +16,38 @@ This example shows how to download an entire year of Lightning Mapping Array dat
     ```shell
     cd ~/Downloads/
     ```
-5. Download a bunch of files
+5. Remove previous index file, if any, to avoid _wget_ quirk
     ```shell
-    wget \
-      --auth-no-challenge \
-      --cookies \
-      --keep-session-cookies \
-      --load-cookies=~/.edl_cookies \
-      --save-cookies=~/.edl_cookies \
-      --recursive \
-      --timestamping \
-      --no-parent \
-      --reject-regex='\?C=.;O=.' \
-      --output-file=bulk-download-example.log \
-      https://ghrc.nsstc.nasa.gov/pub/lma/nalma/solutions/data/2016/
+    rm ghrc.nsstc.nasa.gov/pub/lma/nalma/solutions/data/2016/index.html
     ```
+6. Choose one of these approaches to workaround _wget_ quirk involving EDL handshake and `--recursive`:
+    * Single command, no cookies, repeat URL
+        ```shell
+        wget \
+          --auth-no-challenge \
+          --recursive \
+          --timestamping \
+          --no-parent \
+          --reject-regex='\?C=.;O=.' \
+          --output-file=bulk-download-example.log \
+          https://ghrc.nsstc.nasa.gov/pub/lma/nalma/solutions/data/2016/ \
+          https://ghrc.nsstc.nasa.gov/pub/lma/nalma/solutions/data/2016/
+        ```
+    * Run same command twice, using cookies
+        ```shell
+        wget \
+          --auth-no-challenge \
+          --cookies \
+          --keep-session-cookies \
+          --load-cookies=.edlcookies \
+          --save-cookies=.edlcookies \
+          --recursive \
+          --timestamping \
+          --no-parent \
+          --reject-regex='\?C=.;O=.' \
+          --output-file=bulk-download-example.log \
+          https://ghrc.nsstc.nasa.gov/pub/lma/nalma/solutions/data/2016/
+        ```
 
 The example will create a directory tree, starting with `ghrc.nsstc.nasa.gov`
 
