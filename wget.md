@@ -69,56 +69,30 @@ EDL authentication can be specified:
 
 <tr>
 <th>Command-line argument</th>
-<th>
-
-`~/.wgetrc` option
-
-</th>
+<th><code>~/.wgetrc</code> option</th>
 <th>Good</th>
 <th>Bad</th>
 </tr>
 
 <tr>
-<td>
-
-`--auth-no-challenge`
-
-</td>
-<td>
-
-`auth_no_challenge = on`
-
-</td>
-<td>
-
-Lets _wget_ work smoothly for any DAAC web site, even ones that are not registered as "401"-type applications in EDL
-
-</td>
+<td><code>--auth-no-challenge</code></td>
+<td><code>auth_no_challenge = on</code></td>
+<td>Lets <em>wget</em> work smoothly for any DAAC web site, even ones that are not registered as "401"-type applications in EDL</td>
 <td>Might be considered bad security practice</td>
 </tr>
 
 <tr>
-<td>
-
-```
---cookies
+<td><pre>--cookies
 --keep-session-cookies
 --load-cookies=~/.edl_cookies
 --save-cookies=~/.edl_cookies
-```
-
-</td>
-<td>
-
-```
-cookies = on
+</pre></td>
+<td><pre>cookies = on
 keep_session_cookies = on
 load_cookies = ~/.edl_cookies
 save_cookies = ~/.edl_cookies
-```
-
-</td>
-<td>Supports multiple _wget_ invocations</td>
+</pre></td>
+<td>Supports multiple <em>wget</em> invocations</td>
 <td>Uses insecure storage</td>
 </tr>
 
@@ -132,41 +106,21 @@ save_cookies = ~/.edl_cookies
 
 <tr>
 <th>Command-line argument</th>
-<th>
-
-`~/.wgetrc` option
-
-</th>
+<th><code>~/.wgetrc</code> option</th>
 <th>Good</th>
 <th>Bad</th>
 </tr>
 
 <tr>
-<td>
-
-`--timestamping`
-
-</td>
-<td>
-
-`timestamping = on`
-
-</td>
+<td><code>--timestamping</code></td>
+<td><code>timestamping = on</code></td>
 <td>Avoid re-downloading files that have not changed</td>
 <td></td>
 </tr>
 
 <tr>
-<td>
-
-DO NOT USE `--no-use-server-timestamps`
-
-</td>
-<td>
-
-`use_server_timestamps = on`
-
-</td>
+<td>DO NOT USE <code>--no-use-server-timestamps</code></td>
+<td><code>use_server_timestamps = on</code></td>
 <td>Saved files get correct modification times</td>
 <td></td>
 </tr>
