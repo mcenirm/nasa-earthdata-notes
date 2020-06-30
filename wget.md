@@ -144,3 +144,20 @@ save_cookies = ~/.edl_cookies
 </tr>
 
 </table>
+
+
+## _wget_ requests and server responses
+
+1. _wget_ requests an EDL-gated resource, such as a data file.
+    1. The first time, there is no session cookie to include in the request, so the web server redirects to EDL's `/oauth/authorize` endpoint.
+    2. _wget_ follows the redirect to EDL, and includes basic authentication.
+    3. Assuming the authentication matches a registered profile, and the profile has already authorized the first web site, then EDL redirects back to the web site's redirection URL.
+    4. _wget_ follows the redirect back to the first web site.
+    5. If the first web site can verify the EDL handshake behind the scenes, then it redirects back to the original web request, providing a session cookie.
+1. _wget_ requests an EDL-gated resource, such as a data file.
+    1. This and subsequent times, _wget_ includes the session cookie.
+    2. The web site recognizes the session cookie, so it returns the request resource.
+
+Problems
+* When _wget_ has to go through the EDL redirections, then it somehow stops doing any "recursive" requests.
+* When "timestamping" is enabled and there is an existing copy in the download tree, _wget_ properly makes a "HEAD" request first, to see if the resource is newer than the downloaded copy. Unfortunately, the web server responds with "401 Unauthorized" so _wget_ gives up.
